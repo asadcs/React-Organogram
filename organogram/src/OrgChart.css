@@ -1,0 +1,11 @@
+.node{
+    border:solid 1px #000000;
+    display: inline-block;
+    margin: 5px;
+    /* display: flex;
+flex-direction: row; */
+}
+
+/* .nodeRow{
+
+} */
