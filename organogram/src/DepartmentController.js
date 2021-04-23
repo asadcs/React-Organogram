@@ -34,7 +34,7 @@ const coursePrerequisites = [
                 prerequisites: [],
                 prerequisitesExpanded: [],
                 subject: "ACC",
-                title: "Financial Accounting",
+                title: "ADHA SECTT",
               },
               {
                 corequisites: [],
@@ -53,7 +53,7 @@ const coursePrerequisites = [
                     prerequisites: [],
                     prerequisitesExpanded: [],
                     subject: "ACC",
-                    title: "Financial Accounting",
+                    title: "DSU",
                   },
                 ],
                 subject: "ACC",
@@ -88,7 +88,7 @@ const coursePrerequisites = [
           },
         ],
         subject: "FIN",
-        title: "Investments",
+        title: "ADHA Sectt",
       },
       {
         corequisites: [],
@@ -169,7 +169,7 @@ const coursePrerequisites = [
           },
         ],
         subject: "FIN",
-        title: "Intermediate Managerial Finance",
+        title: "Secy Sectt",
       },
       {
         corequisites: [],
@@ -250,11 +250,92 @@ const coursePrerequisites = [
           },
         ],
         subject: "FIN",
-        title: "Managing New Venture Funding",
+        title: "Chief Engr Br",
+      },
+      {
+        corequisites: [],
+        corequisitesExpanded: [],
+        credits: "3",
+        description: "",
+        number: "345",
+        prerequisites: ["FIN 301"],
+        prerequisitesExpanded: [
+          {
+            corequisites: [],
+            corequisitesExpanded: [],
+            credits: "3",
+            description: "",
+            number: "301",
+            prerequisites: ["ACC 201", "ACC 202", "HON 125"],
+            prerequisitesExpanded: [
+              {
+                corequisites: [],
+                corequisitesExpanded: [],
+                credits: "3",
+                description: "",
+                number: "201",
+                prerequisites: [],
+                prerequisitesExpanded: [],
+                subject: "ACC",
+                title: "Financial Accounting",
+              },
+              {
+                corequisites: [],
+                corequisitesExpanded: [],
+                credits: "3",
+                description: "",
+                number: "202",
+                prerequisites: ["ACC 201"],
+                prerequisitesExpanded: [
+                  {
+                    corequisites: [],
+                    corequisitesExpanded: [],
+                    credits: "3",
+                    description: "",
+                    number: "201",
+                    prerequisites: [],
+                    prerequisitesExpanded: [],
+                    subject: "ACC",
+                    title: "Financial Accounting",
+                  },
+                ],
+                subject: "ACC",
+                title: "Managerial Accounting",
+              },
+              {
+                corequisites: [],
+                corequisitesExpanded: [],
+                credits: "3",
+                description: "",
+                number: "125",
+                prerequisites: ["HON 124"],
+                prerequisitesExpanded: [
+                  {
+                    corequisites: [],
+                    corequisitesExpanded: [],
+                    credits: "3",
+                    description: "",
+                    number: "124",
+                    prerequisites: [],
+                    prerequisitesExpanded: [],
+                    subject: "HON",
+                    title: "Honors College Algebra",
+                  },
+                ],
+                subject: "HON",
+                title: "Adventures in Data Analysis",
+              },
+            ],
+            subject: "FIN",
+            title: "Principles of Managerial Finance",
+          },
+        ],
+        subject: "FIN",
+        title: "Mktg & IT Br",
       },
     ],
     subject: "FIN",
-    title: "Entrepreneurial Finance",
+    title: "DHA",
   },
 ];
 
@@ -265,41 +346,68 @@ const flattern = (arr) => {
 };
 
 const convertPrerequisiteTreeTorows = (Parentcourse) => {
-  const createChildRowfromParentRow = (parentRow) => {
-    const row = flattern(
-      parentRow.map((rowCourses) => rowCourses["prerequisitesExpanded"])
-    );
-    if (row.find((course) => course.prerequisitesExpanded.length > 0)) {
-      return [row].concat(createChildRowfromParentRow(row));
-    }
-    return row;
-  };
-
+  
   //debugger;
   const row1 = [Parentcourse];
   //  console.log('Diff between Parentcourse and [Parentcourse]')
   //   console.log(Parentcourse)
   //   console.log([Parentcourse])
-  //const row2 = Parentcourse["prerequisitesExpanded"];
-   const rows = [row1].concat(createChildRowfromParentRow(row1))
+  const row2 = Parentcourse["prerequisitesExpanded"];
+
+  const row3 = flattern(row2.map((rowCourses) => rowCourses["prerequisitesExpanded"]))
+ 
+ console.warn(row3)
+  //    
+  // const rows = [row1].concat(createChildRowfromParentRow(row1))
   //   console.log("convertPrerequisiteTreeTorows");
   //   console.log("row1" + row1);
- // return [row1, row2];
+  return [row1, row2];
   // return [
   //     ["FIN 408"],
   //     ["FIN 307","FIN 303","FIN 305"],
   //     ["FIN 201","FIN 202"]
   // ]
 
-  return rows
+  //return rows
 };
+
+// const convertPrerequisiteTreeTorows = (Parentcourse) => {
+//   const createChildRowfromParentRow = (parentRow) => {
+//     const row = flattern(
+//       parentRow.map((rowCourses) => rowCourses["prerequisitesExpanded"])
+//     );
+//     if (row.find((course) => course.prerequisitesExpanded.length > 0)) {
+//       return [row].concat(createChildRowfromParentRow(row));
+//     }
+//     return row;
+//   };
+
+//   //debugger;
+//   const row1 = [Parentcourse];
+//   //  console.log('Diff between Parentcourse and [Parentcourse]')
+//   //   console.log(Parentcourse)
+//   //   console.log([Parentcourse])
+//   //const row2 = Parentcourse["prerequisitesExpanded"];
+//    const rows = [row1].concat(createChildRowfromParentRow(row1))
+//   //   console.log("convertPrerequisiteTreeTorows");
+//   //   console.log("row1" + row1);
+//  // return [row1, row2];
+//   // return [
+//   //     ["FIN 408"],
+//   //     ["FIN 307","FIN 303","FIN 305"],
+//   //     ["FIN 201","FIN 202"]
+//   // ]
+
+//   return rows
+// };
 const OrgChartNode = ({ course }) => {
   return (
     <div class="node">
       {/* console.log(course)
         {'asad'} */}
-      {course.subject + " " + course.number + " " + course.title}
+      {/* {course.subject + " " + course.number + " " + course.title} */}
       {/* {course.subject} */}
+      {course.title}
     </div>
   );
 };
@@ -322,7 +430,7 @@ const OrgChart = ({ rows }) => {
   );
 };
 
-class CourseController extends Component {
+class DepartmentController extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -343,4 +451,4 @@ class CourseController extends Component {
   }
 }
 
-export default CourseController;
+export default DepartmentController;
