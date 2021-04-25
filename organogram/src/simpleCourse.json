@@ -1,0 +1,202 @@
+[
+        {
+            "number": "480",
+            "prerequisites": [
+                "FIN 303",
+                "FIN 307",
+                "FIN 345"
+            ],
+            "prerequisitesExpanded": [
+                {
+                    "number": "307",
+                    "prerequisites": [
+                        "FIN 301"
+                    ],
+                    "prerequisitesExpanded": [
+                        {
+                            "number": "301",
+                            "prerequisites": [
+                                "ACC 201",
+                                "ACC 202",
+                                "HON 125"
+                            ],
+                            "prerequisitesExpanded": [
+                                {
+                                    "number": "201",
+                                    "prerequisites": [],
+                                    "prerequisitesExpanded": [],
+                                    "subject": "ACC",
+                                    "title": "Financial Accounting"
+                                },
+                                {
+                                    "number": "202",
+                                    "prerequisites": [
+                                        "ACC 201"
+                                    ],
+                                    "prerequisitesExpanded": [
+                                        {
+                                            "number": "201",
+                                            "prerequisites": [],
+                                            "prerequisitesExpanded": [],
+                                            "subject": "ACC",
+                                            "title": "Financial Accounting"
+                                        }
+                                    ],
+                                    "subject": "ACC",
+                                    "title": "Managerial Accounting"
+                                },
+                                {
+                                    "number": "125",
+                                    "prerequisites": [
+                                        "HON 124"
+                                    ],
+                                    "prerequisitesExpanded": [
+                                        {
+                                            "number": "124",
+                                            "prerequisites": [],
+                                            "prerequisitesExpanded": [],
+                                            "subject": "HON",
+                                            "title": "Honors College Algebra"
+                                        }
+                                    ],
+                                    "subject": "HON",
+                                    "title": "Adventures in Data Analysis"
+                                }
+                            ],
+                            "subject": "FIN",
+                            "title": "Principles of Managerial Finance"
+                        }
+                    ],
+                    "subject": "FIN",
+                    "title": "Investments"
+                },
+                {
+                    "number": "303",
+                    "prerequisites": [
+                        "FIN 301"
+                    ],
+                    "prerequisitesExpanded": [
+                        {
+                            "number": "301",
+                            "prerequisites": [
+                                "ACC 201",
+                                "ACC 202",
+                                "HON 125"
+                            ],
+                            "prerequisitesExpanded": [
+                                {
+                                    "number": "201",
+                                    "prerequisites": [],
+                                    "prerequisitesExpanded": [],
+                                    "subject": "ACC",
+                                    "title": "Financial Accounting"
+                                },
+                                {
+                                    "number": "202",
+                                    "prerequisites": [
+                                        "ACC 201"
+                                    ],
+                                    "prerequisitesExpanded": [
+                                        {
+                                            "prerequisites": [],
+                                            "prerequisitesExpanded": [],
+                                            "subject": "ACC",
+                                            "title": "Financial Accounting"
+                                        }
+                                    ],
+                                    "subject": "ACC",
+                                    "title": "Managerial Accounting"
+                                },
+                                {
+                                    "number": "125",
+                                    "prerequisites": [
+                                        "HON 124"
+                                    ],
+                                    "prerequisitesExpanded": [
+                                        {
+                                            "number": "124",
+                                            "prerequisites": [],
+                                            "prerequisitesExpanded": [],
+                                            "subject": "HON",
+                                            "title": "Honors College Algebra"
+                                        }
+                                    ],
+                                    "subject": "HON",
+                                    "title": "Adventures in Data Analysis"
+                                }
+                            ],
+                            "subject": "FIN",
+                            "title": "Principles of Managerial Finance"
+                        }
+                    ],
+                    "subject": "FIN",
+                    "title": "Intermediate Managerial Finance"
+                },
+                {
+                    "number": "345",
+                    "prerequisites": [
+                        "FIN 301"
+                    ],
+                    "prerequisitesExpanded": [
+                        {
+                            "number": "301",
+                            "prerequisites": [
+                                "ACC 201",
+                                "ACC 202",
+                                "HON 125"
+                            ],
+                            "prerequisitesExpanded": [
+                                {
+                                    "number": "201",
+                                    "prerequisites": [],
+                                    "prerequisitesExpanded": [],
+                                    "subject": "ACC",
+                                    "title": "Financial Accounting"
+                                },
+                                {
+                                    "number": "202",
+                                    "prerequisites": [
+                                        "ACC 201"
+                                    ],
+                                    "prerequisitesExpanded": [
+                                        {
+                                            "number": "201",
+                                            "prerequisites": [],
+                                            "prerequisitesExpanded": [],
+                                            "subject": "ACC",
+                                            "title": "Financial Accounting"
+                                        }
+                                    ],
+                                    "subject": "ACC",
+                                    "title": "Managerial Accounting"
+                                },
+                                {
+                                    "number": "125",
+                                    "prerequisites": [
+                                        "HON 124"
+                                    ],
+                                    "prerequisitesExpanded": [
+                                        {
+                                            "number": "124",
+                                            "prerequisites": [],
+                                            "prerequisitesExpanded": [],
+                                            "subject": "HON",
+                                            "title": "Honors College Algebra"
+                                        }
+                                    ],
+                                    "subject": "HON",
+                                    "title": "Adventures in Data Analysis"
+                                }
+                            ],
+                            "subject": "FIN",
+                            "title": "Principles of Managerial Finance"
+                        }
+                    ],
+                    "subject": "FIN",
+                    "title": "Managing New Venture Funding"
+                }
+            ],
+            "subject": "FIN",
+            "title": "Entrepreneurial Finance"
+        }
+]

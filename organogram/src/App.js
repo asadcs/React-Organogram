@@ -1,11 +1,10 @@
-
-import './App.css';
-import DepartmentController from './DepartmentController';
+import "./App.css";
+import CourseController from "./CourseController";
 
 function App() {
   return (
     <div className="App">
-      <DepartmentController/>
+      <CourseController />
     </div>
   );
 }
