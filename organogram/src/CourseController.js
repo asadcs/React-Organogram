@@ -472,7 +472,7 @@ class CourseController extends Component {
               children: [
                 {
                   name: "Ping Pang",
-                  children: [],
+                  // children: [],
                 },
                 {
                   name: "Xiang Xiang",
