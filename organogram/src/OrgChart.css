@@ -3,6 +3,7 @@
   display: inline-block;
   margin: 5px;
   padding: 2px;
+  width: 100px;
   /* display: flex;
 flex-direction: row; */
 }
@@ -17,3 +18,15 @@ flex-direction: row; */
 /* .nodeRow{
 
 } */
+.childGroup {
+  border: solid lightblue;
+  margin: 2px;
+}
+
+.nodeCell {
+  text-align: center;
+}
+
+.nodeGroupCell {
+  vertical-align: top;
+}

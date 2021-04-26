@@ -34,6 +34,7 @@ function log(Component, variable, variablename) {
   console.log("\n");
   console.log(variable);
   console.log("\n");
+  //debugger;
   console.table(variable);
   console.log("\n");
   console.log(
@@ -44,34 +45,34 @@ function log(Component, variable, variablename) {
   console.log("\n");
 }
 
-const CoursePrerequisites = [
+const Departmentchildren = [
   {
     number: "480",
-    prerequisites: ["FIN 303", "FIN 307", "FIN 345"],
-    prerequisitesExpanded: [
+    children: ["FIN 303", "FIN 307", "FIN 345"],
+    childrenExpanded: [
       {
         number: "307",
-        prerequisites: ["FIN 301"],
-        prerequisitesExpanded: [
+        children: ["FIN 301"],
+        childrenExpanded: [
           {
             number: "301",
-            prerequisites: ["ACC 201", "ACC 202", "HON 125"],
-            prerequisitesExpanded: [
+            children: ["ACC 201", "ACC 202", "HON 125"],
+            childrenExpanded: [
               {
                 number: "201",
-                prerequisites: [],
-                prerequisitesExpanded: [],
+                children: [],
+                childrenExpanded: [],
                 subject: "ACC",
                 title: "Financial Accounting",
               },
               {
                 number: "202",
-                prerequisites: ["ACC 201"],
-                prerequisitesExpanded: [
+                children: ["ACC 201"],
+                childrenExpanded: [
                   {
                     number: "201",
-                    prerequisites: [],
-                    prerequisitesExpanded: [],
+                    children: [],
+                    childrenExpanded: [],
                     subject: "ACC",
                     title: "Financial Accounting",
                   },
@@ -81,12 +82,12 @@ const CoursePrerequisites = [
               },
               {
                 number: "125",
-                prerequisites: ["HON 124"],
-                prerequisitesExpanded: [
+                children: ["HON 124"],
+                childrenExpanded: [
                   {
                     number: "124",
-                    prerequisites: [],
-                    prerequisitesExpanded: [],
+                    children: [],
+                    childrenExpanded: [],
                     subject: "HON",
                     title: "Honors College Algebra",
                   },
@@ -104,26 +105,26 @@ const CoursePrerequisites = [
       },
       {
         number: "303",
-        prerequisites: ["FIN 301"],
-        prerequisitesExpanded: [
+        children: ["FIN 301"],
+        childrenExpanded: [
           {
             number: "301",
-            prerequisites: ["ACC 201", "ACC 202", "HON 125"],
-            prerequisitesExpanded: [
+            children: ["ACC 201", "ACC 202", "HON 125"],
+            childrenExpanded: [
               {
                 number: "201",
-                prerequisites: [],
-                prerequisitesExpanded: [],
+                children: [],
+                childrenExpanded: [],
                 subject: "ACC",
                 title: "Financial Accounting",
               },
               {
                 number: "202",
-                prerequisites: ["ACC 201"],
-                prerequisitesExpanded: [
+                children: ["ACC 201"],
+                childrenExpanded: [
                   {
-                    prerequisites: [],
-                    prerequisitesExpanded: [],
+                    children: [],
+                    childrenExpanded: [],
                     subject: "ACC",
                     title: "Financial Accounting",
                   },
@@ -133,12 +134,12 @@ const CoursePrerequisites = [
               },
               {
                 number: "125",
-                prerequisites: ["HON 124"],
-                prerequisitesExpanded: [
+                children: ["HON 124"],
+                childrenExpanded: [
                   {
                     number: "124",
-                    prerequisites: [],
-                    prerequisitesExpanded: [],
+                    children: [],
+                    childrenExpanded: [],
                     subject: "HON",
                     title: "Honors College Algebra",
                   },
@@ -156,27 +157,27 @@ const CoursePrerequisites = [
       },
       {
         number: "345",
-        prerequisites: ["FIN 301"],
-        prerequisitesExpanded: [
+        children: ["FIN 301"],
+        childrenExpanded: [
           {
             number: "301",
-            prerequisites: ["ACC 201", "ACC 202", "HON 125"],
-            prerequisitesExpanded: [
+            children: ["ACC 201", "ACC 202", "HON 125"],
+            childrenExpanded: [
               {
                 number: "201",
-                prerequisites: [],
-                prerequisitesExpanded: [],
+                children: [],
+                childrenExpanded: [],
                 subject: "ACC",
                 title: "Financial Accounting",
               },
               {
                 number: "202",
-                prerequisites: ["ACC 201"],
-                prerequisitesExpanded: [
+                children: ["ACC 201"],
+                childrenExpanded: [
                   {
                     number: "201",
-                    prerequisites: [],
-                    prerequisitesExpanded: [],
+                    children: [],
+                    childrenExpanded: [],
                     subject: "ACC",
                     title: "Financial Accounting",
                   },
@@ -186,12 +187,12 @@ const CoursePrerequisites = [
               },
               {
                 number: "125",
-                prerequisites: ["HON 124"],
-                prerequisitesExpanded: [
+                children: ["HON 124"],
+                childrenExpanded: [
                   {
                     number: "124",
-                    prerequisites: [],
-                    prerequisitesExpanded: [],
+                    children: [],
+                    childrenExpanded: [],
                     subject: "HON",
                     title: "Honors College Algebra",
                   },
@@ -219,19 +220,23 @@ const flattern = (arr) => {
   }, []);
 };
 
-const convertPrerequisiteTreeTorows = (ParentCourse) => {
+const convertPrerequisiteTreeTorows = (ParentDepartment) => {
   const createChildRowfromParentRow = (parentRow) => {
     console.log(parentRow);
 
     const row = {
-      courses: flattern(
-        parentRow.courses.map(
-          (rowCourses) => rowCourses["prerequisitesExpanded"]
+      departments: flattern(
+        parentRow.departments.map(
+          (rowDepartments) => rowDepartments["childrenExpanded"]
         )
       ),
     };
     //debugger;
-    if (row.courses.find((Course) => Course.prerequisitesExpanded.length > 0)) {
+    if (
+      row.departments.find(
+        (Department) => Department.childrenExpanded.length > 0
+      )
+    ) {
       log("convertPrerequisiteTreeTorows", row, "row1");
       return [row].concat(createChildRowfromParentRow(row));
     }
@@ -239,57 +244,57 @@ const convertPrerequisiteTreeTorows = (ParentCourse) => {
   };
 
   //debugger;
-  //console.log(ParentCourse);
+  //console.log(ParentDepartment);
 
-  const row1 = { courses: [ParentCourse] };
+  const row1 = { departments: [ParentDepartment] };
   log("convertPrerequisiteTreeTorows", row1, "row1");
   return [row1].concat(createChildRowfromParentRow(row1));
 };
 
-// const convertPrerequisiteTreeTorows = (ParentCourse) => {
+// const convertPrerequisiteTreeTorows = (ParentDepartment) => {
 
 //     const createChildRowfromParentRow = (parentRow) => {
 //       const row = flattern(
-//         parentRow.map((rowCourses) => rowCourses["prerequisitesExpanded"])
+//         parentRow.map((rowDepartments) => rowDepartments["childrenExpanded"])
 //       );
-//       if (row.find((Course) => Course.prerequisitesExpanded.length > 0)) {
+//       if (row.find((Department) => Department.childrenExpanded.length > 0)) {
 //         return [row].concat(createChildRowfromParentRow(row));
 //       }
 //       return row;
 //     };
 
 //   //debugger;
-//   //console.log(ParentCourse);
+//   //console.log(ParentDepartment);
 
-//   const row1 = [ParentCourse];
+//   const row1 = [ParentDepartment];
 //   log("convertPrerequisiteTreeTorows", row1, "row1");
 
 //   // console.log("row1-->");
 //   // console.log(row1);
 //   // console.table(row1);
 
-//   //  console.log('Diff between ParentCourse and [ParentCourse]')
-//   //   console.log(ParentCourse)
-//   //   console.log([ParentCourse])
-//   // const row2 = ParentCourse["prerequisitesExpanded"];
+//   //  console.log('Diff between ParentDepartment and [ParentDepartment]')
+//   //   console.log(ParentDepartment)
+//   //   console.log([ParentDepartment])
+//   // const row2 = ParentDepartment["childrenExpanded"];
 //   // log("convertPrerequisiteTreeTorows", row2, "row2");
 //   const row2 = flattern(
-//     row1.map((rowCourses) => rowCourses["prerequisitesExpanded"])
+//     row1.map((rowDepartments) => rowDepartments["childrenExpanded"])
 //   );
 //   // console.log("row2-->");
 //   // console.log(row2);
-//   // const row22 = ParentCourse.prerequisitesExpanded;
+//   // const row22 = ParentDepartment.childrenExpanded;
 //   // console.log("row22-->");
 //   // console.log(row22);
 
 //   const row3 = flattern(
-//     row2.map((rowCourses) => rowCourses["prerequisitesExpanded"])
+//     row2.map((rowDepartments) => rowDepartments["childrenExpanded"])
 //   );
 
 //   log("convertPrerequisiteTreeTorows", row3, "row3");
 
 //   const row4 = flattern(
-//     row3.map((rowCourses) => rowCourses["prerequisitesExpanded"])
+//     row3.map((rowDepartments) => rowDepartments["childrenExpanded"])
 //   );
 
 //   log("convertPrerequisiteTreeTorows", row4, "row4");
@@ -308,23 +313,23 @@ const convertPrerequisiteTreeTorows = (ParentCourse) => {
 //   //return rows
 // };
 
-// const convertPrerequisiteTreeTorows = (ParentCourse) => {
+// const convertPrerequisiteTreeTorows = (ParentDepartment) => {
 //   const createChildRowfromParentRow = (parentRow) => {
 //     const row = flattern(
-//       parentRow.map((rowCourses) => rowCourses["prerequisitesExpanded"])
+//       parentRow.map((rowDepartments) => rowDepartments["childrenExpanded"])
 //     );
-//     if (row.find((Course) => Course.prerequisitesExpanded.length > 0)) {
+//     if (row.find((Department) => Department.childrenExpanded.length > 0)) {
 //       return [row].concat(createChildRowfromParentRow(row));
 //     }
 //     return row;
 //   };
 
 //   //debugger;
-//   const row1 = [ParentCourse];
-//   //  console.log('Diff between ParentCourse and [ParentCourse]')
-//   //   console.log(ParentCourse)
-//   //   console.log([ParentCourse])
-//   //const row2 = ParentCourse["prerequisitesExpanded"];
+//   const row1 = [ParentDepartment];
+//   //  console.log('Diff between ParentDepartment and [ParentDepartment]')
+//   //   console.log(ParentDepartment)
+//   //   console.log([ParentDepartment])
+//   //const row2 = ParentDepartment["childrenExpanded"];
 //    const rows = [row1].concat(createChildRowfromParentRow(row1))
 //   //   console.log("convertPrerequisiteTreeTorows");
 //   //   console.log("row1" + row1);
@@ -337,14 +342,14 @@ const convertPrerequisiteTreeTorows = (ParentCourse) => {
 
 //   return rows
 // };
-const OrgChartNode = ({ Course }) => {
+const OrgChartNode = ({ Department }) => {
   return (
     <div className="node">
-      {/* console.log(Course)
+      {/* console.log(Department)
         {'asad'} */}
-      {/* {Course.subject + " " + Course.number + " " + Course.title} */}
-      {Course.subject} {Course.number}
-      {/* {Course.title} */}
+      {/* {Department.subject + " " + Department.number + " " + Department.title} */}
+      {Department.subject} {Department.number}
+      {/* {Department.title} */}
     </div>
   );
 };
@@ -355,9 +360,9 @@ const OrgChart = ({ rows }) => {
     // console.log(rows)
     <div className="orgChartRow">
       {index} ({row.length}) :
-      {row.courses.map((Course) => (
-        <OrgChartNode Course={Course} />
-        //console.log(Course)
+      {row.departments.map((Department) => (
+        <OrgChartNode Department={Department} />
+        //console.log(Department)
       ))}
     </div>
   ));
@@ -370,78 +375,46 @@ const OrgChart = ({ rows }) => {
   );
 };
 
-const OrgChartRecursive = ({ tree }) => {
-  const renderChildren = (node) => {
-    // <div className="childGroup">
-    const children = node.children.map((child) => (
-      // <td colSpan="2">{node.children.map(renderChildren)}</td>
-      <td colSpan="2">{renderChildren(child)}</td>
-    ));
-
-    return (
-      <table className="childGroup">
-        <tr>
-          <td className="nodeCell" colSpan="6">
-            <OrgChartNode Course={node} />
-            {/* {node.children.map(renderChildren)} */}
-          </td>
-        </tr>
-        <tr>{children}</tr>
-      </table>
-    );
-
-    // </div>
-  };
-  //const parent = <OrgChartNode>course={tree}</OrgChartNode>;
-
-  //const rowNodes = tree.children.map(renderChildren);
-  const rowNodes = renderChildren(tree);
-
-  return (
-    <div className="orgChart">
-      <h1>Responsive Organization chart</h1>
-      {rowNodes}
-    </div>
-  );
-};
-
-class CourseController extends Component {
+class DepartmentController extends Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
   componentDidMount() {}
   render() {
-    log(
-      "CourseController",
+    // console.log("Departmentchildren-->log");
+    // console.log(Departmentchildren);
+    // console.log(Departmentchildren[0]);
+    // console.log(Departmentchildren[1]);
+    // console.log(Departmentchildren[2]);
+    // console.table("Departmentchildren-->Table");
+    // console.table(Departmentchildren);
+    // console.table(Departmentchildren[0]);
 
-      CoursePrerequisites[0],
-      "CoursePrerequisites[0]"
+    log(
+      "DepartmentController",
+
+      Departmentchildren[0],
+      "Departmentchildren[0]"
     );
 
-    // const flatrows = convertPrerequisiteTreeTorows(CoursePrerequisites[0]).map(
-    //   (r) => ({
-    //     ...r,
-    //     length: r.courses.length,
-    //   })
-    // );
+    const flatrows = convertPrerequisiteTreeTorows(Departmentchildren[0]).map(
+      (r) => ({
+        ...r,
+        length: r.departments.length,
+      })
+    );
 
-    // log("CourseController", flatrows, "flatrows");
+    // const mapToRecursive = (course) => ({
+    //   ...course,
+    //   children: course.childrenExpanded,
+    // });
 
-    const mapToRecursive = (course) => ({
-      ...course,
-      children: course.prerequisitesExpanded.map(mapToRecursive),
-    });
-
-    const tree = CoursePrerequisites.map(mapToRecursive)[0];
-
-    log("CourseController", tree, "tree");
-    // console.log(rows);
+    log("DeparrtmentController", flatrows, "flatrows");
     return (
       <div>
         {/* {'asad'} */}
-        {/* <OrgChart rows={flatrows} /> */}
-        <OrgChartRecursive tree={tree} />
+        <OrgChart rows={flatrows} />
         {/* {console.log("OrgChart" + rows)}
         {console.log(rows)} */}
       </div>
@@ -449,4 +422,4 @@ class CourseController extends Component {
   }
 }
 
-export default CourseController;
+export default DepartmentController;
