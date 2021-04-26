@@ -348,6 +348,22 @@ const OrgChartNode = ({ Course }) => {
     </div>
   );
 };
+
+const OrgChartChinaNode = ({ Course }) => {
+  return (
+    <div
+      className="node"
+      onClick={() => alert("Hi my name is : " + Course.name)}
+    >
+      {/* console.log(Course)
+        {'asad'} */}
+      {/* {Course.subject + " " + Course.number + " " + Course.title} */}
+      {Course.name}
+      {/* {Course.title} */}
+    </div>
+  );
+};
+
 const OrgChart = ({ rows }) => {
   log("OrgChart", rows, "rows");
 
@@ -370,10 +386,10 @@ const OrgChart = ({ rows }) => {
   );
 };
 
-const OrgChartRecursive = ({ tree }) => {
+const OrgChartRecursive = ({ title, tree, NodeComponent }) => {
   const renderChildren = (node) => {
     // <div className="childGroup">
-    const children = node.children.map((child) => (
+    const children = (node.children || []).map((child) => (
       // <td colSpan="2">{node.children.map(renderChildren)}</td>
       <td colSpan="2">{renderChildren(child)}</td>
     ));
@@ -382,7 +398,7 @@ const OrgChartRecursive = ({ tree }) => {
       <table className="childGroup">
         <tr>
           <td className="nodeCell" colSpan="6">
-            <OrgChartNode Course={node} />
+            <NodeComponent Course={node} />
             {/* {node.children.map(renderChildren)} */}
           </td>
         </tr>
@@ -399,7 +415,7 @@ const OrgChartRecursive = ({ tree }) => {
 
   return (
     <div className="orgChart">
-      <h1>Responsive Organization chart</h1>
+      <h1>{title}</h1>
       {rowNodes}
     </div>
   );
@@ -437,13 +453,54 @@ class CourseController extends Component {
     // );
     const tree = CoursePrerequisites.map(mapToRecursive)[0];
 
+    const workplaceOrgChart = {
+      name: "Lao Lao",
+      children: [
+        {
+          name: "Bo Miao",
+          children: [],
+        },
+        {
+          name: "So Miao",
+          children: [
+            {
+              name: "Tie Hua",
+              // children: [],
+            },
+            {
+              name: "Hei Hua",
+              children: [
+                {
+                  name: "Ping Pang",
+                  children: [],
+                },
+                {
+                  name: "Xiang Xiang",
+                  children: [],
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    };
+
     // log("CourseController", tree, "tree");
     // console.log(rows);
     return (
       <div>
         {/* {'asad'} */}
         {/* <OrgChart rows={flatrows} /> */}
-        <OrgChartRecursive tree={tree} />
+        <OrgChartRecursive
+          title="Chart1"
+          tree={tree}
+          NodeComponent={OrgChartNode}
+        />
+        <OrgChartRecursive
+          title="Chart2"
+          tree={workplaceOrgChart}
+          NodeComponent={OrgChartChinaNode}
+        />
         {/* {console.log("OrgChart" + rows)}
         {console.log(rows)} */}
       </div>
