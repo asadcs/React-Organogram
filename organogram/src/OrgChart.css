@@ -1,11 +1,19 @@
-.node{
-    border:solid 1px #000000;
-    display: inline-block;
-    margin: 5px;
-    /* display: flex;
+.node {
+  border: solid 1px #000000;
+  display: inline-block;
+  margin: 5px;
+  padding: 2px;
+  /* display: flex;
 flex-direction: row; */
 }
-
+.orgChart {
+  margin: 2px;
+  border: solid 1px #ccc;
+}
+.orgChartRow {
+  margin: 2px;
+  border: solid 1px #aaa;
+}
 /* .nodeRow{
 
 } */

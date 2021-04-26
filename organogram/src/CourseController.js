@@ -221,10 +221,17 @@ const flattern = (arr) => {
 
 const convertPrerequisiteTreeTorows = (ParentCourse) => {
   const createChildRowfromParentRow = (parentRow) => {
-    const row = flattern(
-      parentRow.map((rowCourses) => rowCourses["prerequisitesExpanded"])
-    );
-    if (row.find((Course) => Course.prerequisitesExpanded.length > 0)) {
+    console.log(parentRow);
+
+    const row = {
+      courses: flattern(
+        parentRow.courses.map(
+          (rowCourses) => rowCourses["prerequisitesExpanded"]
+        )
+      ),
+    };
+    //debugger;
+    if (row.courses.find((Course) => Course.prerequisitesExpanded.length > 0)) {
       log("convertPrerequisiteTreeTorows", row, "row1");
       return [row].concat(createChildRowfromParentRow(row));
     }
@@ -234,7 +241,7 @@ const convertPrerequisiteTreeTorows = (ParentCourse) => {
   //debugger;
   //console.log(ParentCourse);
 
-  const row1 = [ParentCourse];
+  const row1 = { courses: [ParentCourse] };
   log("convertPrerequisiteTreeTorows", row1, "row1");
   return [row1].concat(createChildRowfromParentRow(row1));
 };
@@ -335,24 +342,20 @@ const OrgChartNode = ({ Course }) => {
     <div className="node">
       {/* console.log(Course)
         {'asad'} */}
-      {Course.subject + " " + Course.number + " " + Course.title}
-      {/* {Course.subject} */}
+      {/* {Course.subject + " " + Course.number + " " + Course.title} */}
+      {Course.subject} {Course.number}
       {/* {Course.title} */}
     </div>
   );
 };
 const OrgChart = ({ rows }) => {
-  // console.log("----------------");
-  // console.log("OrgChart rows ");
-  // console.log("----------------");
-  // console.log(rows);
-  // console.log("----------------");
   log("OrgChart", rows, "rows");
 
-  const rowNodes = rows.map((row) => (
+  const rowNodes = rows.map((row, index) => (
     // console.log(rows)
-    <div>
-      {row.map((Course) => (
+    <div className="orgChartRow">
+      {index} ({row.length}) :
+      {row.courses.map((Course) => (
         <OrgChartNode Course={Course} />
         //console.log(Course)
       ))}
@@ -360,7 +363,7 @@ const OrgChart = ({ rows }) => {
   ));
 
   return (
-    <div>
+    <div className="orgChart">
       <h1>Responsive Organization chart</h1>
       {rowNodes}
     </div>
@@ -390,14 +393,19 @@ class CourseController extends Component {
       "CoursePrerequisites[0]"
     );
 
-    const rows = convertPrerequisiteTreeTorows(CoursePrerequisites[0]);
-    console.log(rows);
+    const rows = convertPrerequisiteTreeTorows(CoursePrerequisites[0]).map(
+      (r) => ({
+        ...r,
+        length: r.courses.length,
+      })
+    );
+    // console.log(rows);
     return (
       <div>
         {/* {'asad'} */}
         <OrgChart rows={rows} />
-        {console.log("OrgChart" + rows)}
-        {console.log(rows)}
+        {/* {console.log("OrgChart" + rows)}
+        {console.log(rows)} */}
       </div>
     );
   }
