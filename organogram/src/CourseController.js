@@ -339,7 +339,10 @@ const convertPrerequisiteTreeTorows = (ParentCourse) => {
 // };
 const OrgChartNode = ({ Course }) => {
   return (
-    <div className="node">
+    <div
+      className="node"
+      onClick={() => alert(Course.subject + Course.number + " is clicked.")}
+    >
       {/* console.log(Course)
         {'asad'} */}
       {/* {Course.subject + " " + Course.number + " " + Course.title} */}
@@ -353,7 +356,7 @@ const OrgChartChinaNode = ({ Course }) => {
   return (
     <div
       className="node"
-      onClick={() => alert("Hi my name is : " + Course.name)}
+      onClick={() => alert("Hello my name is : " + Course.name)}
     >
       {/* console.log(Course)
         {'asad'} */}
