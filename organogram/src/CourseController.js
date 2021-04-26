@@ -412,13 +412,6 @@ class CourseController extends Component {
   }
   componentDidMount() {}
   render() {
-    log(
-      "CourseController",
-
-      CoursePrerequisites[0],
-      "CoursePrerequisites[0]"
-    );
-
     // const flatrows = convertPrerequisiteTreeTorows(CoursePrerequisites[0]).map(
     //   (r) => ({
     //     ...r,
@@ -432,10 +425,19 @@ class CourseController extends Component {
       ...course,
       children: course.prerequisitesExpanded.map(mapToRecursive),
     });
-
+    // log(
+    //   "CourseController",
+    //   CoursePrerequisites.map(mapToRecursive),
+    //   "CoursePrerequisites.map(mapToRecursive)"
+    // );
+    // log(
+    //   "CourseController",
+    //   CoursePrerequisites.map(mapToRecursive)[0],
+    //   "CoursePrerequisites.map(mapToRecursive)[0]"
+    // );
     const tree = CoursePrerequisites.map(mapToRecursive)[0];
 
-    log("CourseController", tree, "tree");
+    // log("CourseController", tree, "tree");
     // console.log(rows);
     return (
       <div>
