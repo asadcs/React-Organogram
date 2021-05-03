@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { CreateAPIEndPoint, END_POINTS } from "./api";
 import "./OrgChart.css";
 
 function log(Component, variable, variablename) {
@@ -390,6 +391,7 @@ const OrgChart = ({ rows }) => {
 };
 
 const OrgChartRecursive = ({ title, tree, NodeComponent }) => {
+  log(title, tree, "tree");
   const renderChildren = (node) => {
     // <div className="childGroup">
     const children = (node.children || []).map((child) => (
@@ -414,22 +416,52 @@ const OrgChartRecursive = ({ title, tree, NodeComponent }) => {
   //const parent = <OrgChartNode>course={tree}</OrgChartNode>;
 
   //const rowNodes = tree.children.map(renderChildren);
-  const rowNodes = renderChildren(tree);
+  // const rowNodes = renderChildren(tree);
 
   return (
     <div className="orgChart">
       <h1>{title}</h1>
-      {rowNodes}
+      {renderChildren(tree)}
     </div>
   );
 };
 
+//  const [departmentList, setDepartmentList] = useState([]);
+
+//  useEffect(() => {
+//    CreateAPIEndPoint(END_POINTS.depar)
+//      .fetchAll()
+//      .then((res) => {
+//        console.log(res.data);
+//        setOrderList(res.data);
+//      })
+//      .catch((err) => console.log(err));
+//  }, []);
+
 class CourseController extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      departments: [],
+    };
   }
-  componentDidMount() {}
+  componentDidMount() {
+    // axios.get("https://api.npms.io/v2/search?q=react").then((response) => {
+    //   alert(response.data);
+    // });
+    CreateAPIEndPoint(END_POINTS.DEPARTMENT)
+      .fetchAll()
+      .then((res) => {
+        console.log(res.data);
+        console.log(res.data[0]);
+
+        //setOrderList(res.data); =
+      //  this.setState(res.data[0]);
+        this.setState({departments: res.data[0]})
+
+      })
+      .catch((err) => console.log(err));
+  }
   render() {
     // const flatrows = convertPrerequisiteTreeTorows(CoursePrerequisites[0]).map(
     //   (r) => ({
@@ -489,7 +521,8 @@ class CourseController extends Component {
     };
 
     // log("CourseController", tree, "tree");
-    // console.log(rows);
+    console.log(workplaceOrgChart);
+    console.log(this.state.departments);
     return (
       <div>
         {/* {'asad'} */}
@@ -504,6 +537,13 @@ class CourseController extends Component {
           tree={workplaceOrgChart}
           NodeComponent={OrgChartChinaNode}
         />
+        {/* console.log(workplaceOrgChart); */}
+        <OrgChartRecursive
+          title="Chart3"
+          tree={this.state.departments}
+          NodeComponent={OrgChartChinaNode}
+        />
+        {/* {console.log(this.state.departments); */}
         {/* {console.log("OrgChart" + rows)}
         {console.log(rows)} */}
       </div>
