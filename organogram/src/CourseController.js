@@ -402,27 +402,16 @@ const OrgChartRecursive = ({ title, tree, NodeComponent }) => {
       return node.children.length > childIndex + 1;
     };
 
-    const childrenLines = (node.children || []).map((child, childIndex) => (
+    // const calculateLength = (i) => {
+    //   return node.children.length * i;
+    // };
+    const nodeLineBelow = (node) => (
       // <td colSpan="2">{node.childchildIndexren.map(renderChildren)}</td>
-      <td colSpan="2" className="nodeGroupCellLines">
+      <td colSpan={node.children.length * 2} className="nodeGroupCellLines">
         <table className="nodeLineTable">
           <tr>
-            <td
-              className={
-                "nodeLineCell nodeGroupLineVerticalMiddle " +
-                // "nodeLineCell" +
-                (hasSiblingsLeft(childIndex) ? "nodeLineBorderTop" : "")
-              }
-            ></td>
-            <td
-              className={
-                "nodeLineCell" + hasSiblingsRight(childIndex)
-                  ? "nodeLineBorderTop"
-                  : ""
-              }
-            >
-              {childIndex}-{node.children.length}
-            </td>
+            <td className="nodeLineCell nodeGroupLineVerticalMiddle "></td>
+            <td className="nodeLineCell ">{node.children.length}</td>
           </tr>
         </table>
         {/* <table>
@@ -450,7 +439,55 @@ const OrgChartRecursive = ({ title, tree, NodeComponent }) => {
         "
         ></div> */}
       </td>
-    ));
+    );
+    const childrenLinesAbove = (node.children || []).map(
+      (child, childIndex) => (
+        // <td colSpan="2">{node.childchildIndexren.map(renderChildren)}</td>
+        <td colSpan="2" className="nodeGroupCellLines">
+          <table className="nodeLineTable">
+            <tr>
+              <td
+                className={
+                  "nodeLineCell nodeGroupLineVerticalMiddle " +
+                  // "nodeLineCell" +
+                  (hasSiblingsLeft(childIndex) ? "nodeLineBorderTop" : "")
+                }
+              ></td>
+              <td
+                className={
+                  "nodeLineCell " +
+                  (hasSiblingsRight(childIndex) ? "nodeLineBorderTop" : "")
+                }
+              ></td>
+            </tr>
+          </table>
+          {/* <table>
+          <tr>
+            <td
+              className={
+                "nodeLine" +
+                "nodeGroupLineVerticalMiddle" +
+                hasSiblingsRight(childIndex)
+                  ? "nodeLineBorderTop"
+                  : ""
+              }
+            ></td>
+            <td
+              className="nodeGroupLineVerticalMiddle 
+        {hasSiblingsRight(childIndex)?'nodeGroupLineRight'}
+        "
+            ></td>
+          </tr>
+        </table> */}
+
+          {/* <div
+          className="nodeGroupLineVerticalMiddle 
+        {hasSiblingsRight(childIndex)?'nodeGroupLineRight'}
+        "
+        ></div> */}
+        </td>
+      )
+    );
 
     const children = (node.children || []).map((child) => (
       // <td colSpan="2">{node.children.map(renderChildren)}</td>
@@ -465,7 +502,8 @@ const OrgChartRecursive = ({ title, tree, NodeComponent }) => {
             {/* {node.children.map(renderChildren)} */}
           </td>
         </tr>
-        <tr>{childrenLines}</tr>
+        <tr>{nodeLineBelow}</tr>
+        <tr>{childrenLinesAbove}</tr>
         <tr>{children}</tr>
       </table>
     );
