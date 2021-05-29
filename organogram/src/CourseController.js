@@ -394,19 +394,78 @@ const OrgChartRecursive = ({ title, tree, NodeComponent }) => {
   log(title, tree, "tree");
   const renderChildren = (node) => {
     // <div className="childGroup">
+    const hasSiblingsLeft = (childIndex) => {
+      return childIndex > 0;
+    };
+
+    const hasSiblingsRight = (childIndex) => {
+      return node.children.length > childIndex + 1;
+    };
+
+    const childrenLines = (node.children || []).map((child, childIndex) => (
+      // <td colSpan="2">{node.childchildIndexren.map(renderChildren)}</td>
+      <td colSpan="2" className="nodeGroupCellLines">
+        <table className="nodeLineTable">
+          <tr>
+            <td
+              className={
+                "nodeLineCell nodeGroupLineVerticalMiddle " +
+                // "nodeLineCell" +
+                (hasSiblingsLeft(childIndex) ? "nodeLineBorderTop" : "")
+              }
+            ></td>
+            <td
+              className={
+                "nodeLineCell" + hasSiblingsRight(childIndex)
+                  ? "nodeLineBorderTop"
+                  : ""
+              }
+            >
+              {childIndex}-{node.children.length}
+            </td>
+          </tr>
+        </table>
+        {/* <table>
+          <tr>
+            <td
+              className={
+                "nodeLine" +
+                "nodeGroupLineVerticalMiddle" +
+                hasSiblingsRight(childIndex)
+                  ? "nodeLineBorderTop"
+                  : ""
+              }
+            ></td>
+            <td
+              className="nodeGroupLineVerticalMiddle 
+        {hasSiblingsRight(childIndex)?'nodeGroupLineRight'}
+        "
+            ></td>
+          </tr>
+        </table> */}
+
+        {/* <div
+          className="nodeGroupLineVerticalMiddle 
+        {hasSiblingsRight(childIndex)?'nodeGroupLineRight'}
+        "
+        ></div> */}
+      </td>
+    ));
+
     const children = (node.children || []).map((child) => (
       // <td colSpan="2">{node.children.map(renderChildren)}</td>
       <td colSpan="2">{renderChildren(child)}</td>
     ));
 
     return (
-      <table className="childGroup">
+      <table className="orgNodeChildGroup">
         <tr>
           <td className="nodeCell" colSpan="6">
             <NodeComponent Course={node} />
             {/* {node.children.map(renderChildren)} */}
           </td>
         </tr>
+        <tr>{childrenLines}</tr>
         <tr>{children}</tr>
       </table>
     );
@@ -456,9 +515,8 @@ class CourseController extends Component {
         console.log(res.data[0]);
 
         //setOrderList(res.data); =
-      //  this.setState(res.data[0]);
-        this.setState({departments: res.data[0]})
-
+        //  this.setState(res.data[0]);
+        this.setState({ departments: res.data[0] });
       })
       .catch((err) => console.log(err));
   }

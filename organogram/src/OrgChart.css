@@ -1,4 +1,4 @@
-.node {
+.orgNodeChildGroup .node {
   border: solid 1px #000000;
   display: inline-block;
   margin: 5px;
@@ -18,15 +18,55 @@ flex-direction: row; */
 /* .nodeRow{
 
 } */
-.childGroup {
+.orgNodeChildGroup {
   border: solid lightblue;
   margin: 2px;
 }
 
-.nodeCell {
+.orgNodeChildGroup .nodeCell {
   text-align: center;
 }
 
-.nodeGroupCell {
+.orgNodeChildGroup .nodeGroupCell {
   vertical-align: top;
+}
+
+.orgNodeChildGroup .nodeGroupLineVerticalMiddle {
+  height: 25px;
+  width: 50%;
+  border-right: 2px solid #000;
+}
+.nodeGroupLineRight {
+  /* height: 25px;
+  width: 50%; */
+  border-top: 2px solid #000;
+}
+.nodeLineBorderTop {
+  /* height: 25px;
+  width: 50%; */
+  /* width: 50px; */
+  border-top: 2px solid #000;
+}
+
+td.nodeLine {
+  width: 50%;
+}
+
+table.nodeLineTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table td.nodeCell {
+  width: 50%;
+  /* padding: 0; */
+}
+.orgChart table {
+  border-collapse: collapse;
+}
+.orgChart td {
+  padding: 0;
+}
+
+.nodeGroupCellLines {
 }

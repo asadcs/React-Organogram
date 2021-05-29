@@ -369,7 +369,7 @@ const OrgChart = ({ rows }) => {
 
   return (
     <div className="orgChart">
-      <h1>Responsive Organization chart</h1>
+      <h1>DHA Organization chart</h1>
       {rowNodes}
     </div>
   );
